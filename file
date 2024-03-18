@@ -1,1 +1,127 @@
-file:///Users/cuixinyue/Desktop/stats220/Project1/project1_report.html
+---
+title: "Creating images with R"
+subtitle: "with a little bit of magick"
+author: "Xinyue Cui"
+date: "2024-03-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+```{css}
+{background: linear-gradient(to right, #990099, #ff33ff, #ff1aff, #ffb3ff);
+    -webkit-text-fill-color: transparent
+    -webkit-background-clip: text;
+ font-family: "Times New Roman"}
+body{background-color: #ffe6ff}
+{font-family: ‘Times New Roman’, cursive;
+}
+```
+
+## Project requirements
+This is my GitHub Page Link: https://github.com/vickycuii/stats-220
+
+This is my GitHub Webiste link: file:///Users/cuixinyue/Desktop/stats220/Project1/project1_report.html
+
+In this response, I've met the requirements related to working with GitHub by:
+
+1.Creating a new repository named "stats220" on GitHub. 2.Including a README.md file in the repository, providing information about the purpose of the repository using Markdown syntax. 3.Demonstrating how to download an image from a URL and displaying it in RStudio. 4.Also in part one, I made a meme by R. I also writw the README.md to intorduce the repo for the people who can have a chance to visit my page online.
+While thinking and creating, I came up with some interesting creative elements. I like cats very much, so in meme production, I chose pictures of cats to complete this creation. For animation creation, I used my favorite One of my favorite patterns: hearts.
+
+![](images/Screen%20Shot%202024-03-18%20at%208.01.02%20PM-01.png)
+
+## My meme
+This is a meme that I created about the emotion for 'go to school' and 'off school'. I think this is a interesting topic. I have changed the function and text for my meme. 
+
+![](my_meme.png){width="318"}
+
+```{r meme-code, eval=TRUE}
+library(magick)
+#first meme
+way_to_school <- image_read(path = "file:///Users/cuixinyue/Desktop/stats220/inspo_meme2.png")%>%
+  image_resize("500x500!")
+#second meme
+finish_school <-image_read(path = "file:///Users/cuixinyue/Desktop/stats220/inspo_meme.png")%>%
+  image_resize("500x500!")
+
+#first text
+#the box
+school_text <- image_blank(width = 500, height = 500, color = "#FFFFFF")%>%
+  #the text
+  image_annotate(text = "On my way to school", 
+                 color = "#000000", 
+                 size = 60, 
+                 font = "Impact", 
+                 gravity = "center")
+
+#second text
+#the box
+finish_text <- image_blank(width = 500, height = 500, color = "#000000")%>%
+  #the text
+  image_annotate(text = "On my way finish school", 
+                 color = "#FFFFFF", 
+                 size = 50, 
+                 font = "Impact", 
+                 gravity = "center")
+
+# append the first meme and text together
+top_row <- image_append(c(school_text, way_to_school))
+bottom_row <- image_append(c(finish_text, finish_school))
+
+#the whole meme
+meme <- c(top_row, bottom_row)%>%
+  image_append(stack = TRUE)%>%
+  image_scale(800)
+
+#save meme
+image_write(meme, "my_meme.png")
+
+```
+This is animation meme that I created. I really like cats a lot, so I found one of my favorite patterns: a red heart as a representation. 
+![](my_animation.gif){width="273"}
+
+```{r animation-code, eval=FALSE}
+library(magick)
+#creating vector
+counts <- 1 : 4 %>% as.character()
+
+heart_image <- image_read("file:///Users/cuixinyue/Desktop/stats220/inspo_heart.png")%>%
+  image_scale(500)
+
+#creating frame
+frame1 <- heart_image %>%
+  image_annotate(text = counts[3], size = 100, gravity = "center") %>%
+  image_scale(200) %>%
+  image_extent("500x500!")
+frame2 <- heart_image %>%
+  image_annotate(text = counts[2], size = 100, gravity = "center") %>%
+  image_scale(300) %>%
+  image_extent("500x500!")
+frame3 <- heart_image %>%
+  image_annotate(text = counts[1], size = 100, gravity = "center") %>%
+  image_scale(400) %>%
+  image_extent("500x500!")
+frame4 <- heart_image %>%
+  image_annotate(text = "love you!", size = 100, gravity = "center") %>%
+  image_scale(500) %>%
+  image_extent("500x500!")
+
+#put each frame together
+frames <- c(frame1, frame2, frame3, frame4)
+
+#creating the animation image
+graph <- image_animate(frames, fps = 1)
+
+#save the image in my laptop
+image_write(graph, "my_animation.gif")
+```
+
+## Creativity
+
+In a project combining the power of RStudio and GitHub, I used more CSS than needed to change the appearance of the HTML and make it look more beautiful. For the meme image creation process, I used some basic functions but got some different pictures. In GitHub, I added more novel content, such as my own interests and hobbies and added the Rmd web page in my Github.
+
+## Learning reflection
+
+HTML is used everywhere, which was one of the main lessons I learned from Module 1’s lesson. In this project and study, I realized the development and greatness of modern technology. We can use some modern information, such as programming, to show different results. I initially thought that programming R language and creating HTML was a very difficult thing. After completing this project, I found that it was not as difficult as I thought. I could use different function equations to create different pictures. I would like to learn more about the HTML and how I can use it to make more things, such as intricate diagrams, movies, and other things.
