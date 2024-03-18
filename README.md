@@ -10,5 +10,5 @@ The first thing is to create a meme by R and show it with a markdown file on [Gi
 I am an undergraduate student from the University of Auckland. My major is data science. I am currently learning more about programming and statistics. I hope my knowledge can make my experience richer.
 ### Hobbies
 1. Skiing 🏂
-2. Photograph 📹
+2. Photograph 📷
 3. Guitar 🎸
